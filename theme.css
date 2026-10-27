@@ -1,0 +1,103 @@
+/**
+ * AUTOMANAGER — tema base preto + laranja (tokens únicos)
+ * Carregar antes dos restantes stylesheets.
+ */
+:root {
+  --am-black: #0e0e12;
+  --am-black-2: #212121;
+  --am-black-3: #1c1c1c;
+  --am-surface: #2a2a2a;
+  --am-surface-2: #26262f;
+  --am-elevated: #2c2c36;
+  --am-border: rgba(255, 255, 255, 0.09);
+  --am-border-strong: rgba(255, 255, 255, 0.14);
+  --am-text: #f4f4f8;
+  --am-text-muted: #b4b4c0;
+  --am-accent: #ea580c;
+  --am-accent-hover: #f97316;
+  --am-accent-soft: rgba(249, 115, 22, 0.14);
+  --am-radius: 10px;
+  --am-font: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Compatibilidade — style.css / landing */
+  --primary: var(--am-accent);
+  --accent: var(--am-accent-hover);
+  --bg-dark1: var(--am-black-2);
+  --bg-dark2: var(--am-surface-2);
+  --text: var(--am-text);
+  --muted: var(--am-text-muted);
+  --card: var(--am-elevated);
+  --radius: var(--am-radius);
+  --max-width: 1200px;
+  --gap: 18px;
+
+  /* Termos / painéis */
+  --bg: var(--am-black-2);
+  --panel: var(--am-surface);
+
+  /* Chefe / legado “primary-color” */
+  --primary-color: var(--am-accent);
+  --primary-dark: #c2410c;
+  --primary-light: var(--am-accent-hover);
+  --secondary-color: var(--am-surface-2);
+  --accent-color: var(--am-accent-hover);
+  --bg-dark: var(--am-surface-2);
+  --bg-darker: var(--am-black);
+  --bg-card: rgba(28, 28, 34, 0.96);
+  --bg-hover: var(--am-accent-soft);
+  --text-primary: var(--am-text);
+  --text-secondary: #d4d4d8;
+  --text-muted: var(--am-text-muted);
+  --text-accent: var(--am-accent-hover);
+  --border-color: var(--am-border-strong);
+  --border: #383844;
+  --dark: var(--am-black-2);
+  --dark-light: var(--am-surface-2);
+  --dark-lighter: var(--am-elevated);
+  --glow-color: rgba(249, 115, 22, 0.22);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
+  --shadow-color: rgba(0, 0, 0, 0.28);
+
+  /* Estados (discretos, legíveis em fundo escuro) */
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.18);
+  --warning: #eab308;
+  --danger: #ef4444;
+  --info: #78716c;
+
+  --status-active: var(--success);
+  --status-pending: var(--warning);
+  --status-inactive: var(--danger);
+  --status-completed: var(--info);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--am-accent-hover);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--am-accent-hover);
+  outline-offset: 2px;
+}
+
+/* Base comum em páginas que carregam theme.css primeiro */
+html {
+  color-scheme: dark;
+}

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="stylesheet" href="theme.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Responsividade - AUTOMANAGER</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ff8a42;
+            margin-bottom: 30px;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+        }
+
+        h2 {
+            color: #ff8a42;
+            margin: 20px 0 10px;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+        }
+
+        .test-section {
+            background: #2a2a2a;
+            padding: clamp(1rem, 3vw, 2rem);
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ff8a42;
+        }
+
+        .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #ff8a42;
+            margin-bottom: 10px;
+        }
+
+        .test-button {
+            display: inline-block;
+            background: #ff8a42;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 5px;
+            min-height: 44px;
+            min-width: 44px;
+            transition: all 0.3s;
+        }
+
+        .test-button:hover {
+            background: #ff6b00;
+            transform: translateY(-2px);
+        }
+
+        .test-button:active {
+            transform: scale(0.98);
+        }
+
+        .breakpoint-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff8a42;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            z-index: 9999;
+            font-size: 12px;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .test-table th,
+        .test-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .test-table th {
+            background: #ff8a42;
+            color: white;
+            font-weight: 600;
+        }
+
+        .test-table tr:hover {
+            background: #2a2a2a;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .status-ok {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .status-error {
+            background: #f44336;
+            color: white;
+        }
+
+        .code-block {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            border-left: 3px solid #ff8a42;
+        }
+
+        .hide-mobile {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hide-mobile {
+                display: none;
+            }
+
+            .responsive-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .breakpoint-indicator {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px 15px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> Teste de Responsividade - AUTOMANAGER</h1>
+
+        <div class="test-section">
+            <h2>[DISPOSITIVO] Detecção de Dispositivo</h2>
+            <p>Redimensione a janela do browser para ver mudanças. O indicador no canto inferior direito mostra o breakpoint atual.</p>
+            <div id="deviceInfo" style="margin-top: 15px; padding: 15px; background: #1a1a1a; border-radius: 8px;">
+                <p><strong>Tipo de Dispositivo:</strong> <span id="deviceType">-</span></p>
+                <p><strong>Breakpoint:</strong> <span id="breakpoint">-</span></p>
+                <p><strong>Orientação:</strong> <span id="orientation">-</span></p>
+                <p><strong>Resolução:</strong> <span id="resolution">-</span></p>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>[ALVO] Teste de Grid Responsivo</h2>
+            <p>Este grid muda de colunas automaticamente baseado na tela:</p>
+            <div class="responsive-grid">
+                <div class="card">
+                    <h3>Card 1</h3>
+                    <p>Em mobile: 1 coluna</p>
+                    <p>Em tablet: 2 colunas</p>
+                    <p>Em desktop: 3+ colunas</p>
+                </div>
+                <div class="card">
+                    <h3>Card 2</h3>
+                    <p>Conteúdo responsivo</p>
+                </div>
+                <div class="card">
+                    <h3>Card 3</h3>
+                    <p>Teste em várias resoluções</p>
+                </div>
+                <div class="card">
+                    <h3>Card 4</h3>
+                    <p>Redimensione para ver mudanças</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>[BOTAO] Teste de Botões Touch-Friendly</h2>
+            <p>Todos os botões têm mínimo 44x44px (ideal para touch):</p>
+            <div>
+                <button class="test-button">Botão Normal</button>
+                <button class="test-button">Outro Botão</button>
+                <button class="test-button">Clique-me</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>[RELATORIO] Teste de Tabela Responsiva</h2>
+            <p>Em mobile, a tabela tem scroll horizontal. Teste redimensionando:</p>
+            <div style="overflow-x: auto;">
+                <table class="test-table">
+                    <thead>
+                        <tr>
+                            <th>Funcionalidade</th>
+                            <th>Desktop</th>
+                            <th>Tablet</th>
+                            <th>Mobile</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Grid Responsivo</td>
+                            <td>[OK]</td>
+                            <td>[OK]</td>
+                            <td>[OK]</td>
+                            <td><span class="status-badge status-ok">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>Menu Colapsável</td>
+                            <td>Sempre Visível</td>
+                            <td>Colapsável</td>
+                            <td>Colapsável</td>
+                            <td><span class="status-badge status-ok">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>Tipografia Responsiva</td>
+                            <td>[OK]</td>
+                            <td>[OK]</td>
+                            <td>[OK]</td>
+                            <td><span class="status-badge status-ok">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>Touch-Friendly</td>
+                            <td>N/A</td>
+                            <td>[OK]</td>
+                            <td>[OK]</td>
+                            <td><span class="status-badge status-ok">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>Hover Effects</td>
+                            <td>[OK]</td>
+                            <td>[AVISO] Parcial</td>
+                            <td>Desabilitado</td>
+                            <td><span class="status-badge status-warning">INFO</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>[DOCS] Código de Teste</h2>
+            <p>Para verificar se responsive.js está carregado:</p>
+            <div class="code-block">
+// Abra console (F12) e execute:
+console.log(ResponsiveHelpers.isMobile());
+console.log(ResponsiveHelpers.getCurrentBreakpoint());
+            </div>
+        </div>
+
+        <div class="test-section hide-mobile">
+            <h2>ℹ Informação</h2>
+            <p>Este é um teste visual de responsividade. Se conseguir ler este texto, significa que está num desktop ou tablet.</p>
+            <p><strong>Dica:</strong> Abra as DevTools (F12) e teste com diferentes resoluções de dispositivo.</p>
+        </div>
+    </div>
+
+    <div class="breakpoint-indicator">
+        <div id="breakpointBadge">Carregando...</div>
+    </div>
+
+    <script>
+        // Função para atualizar informações de dispositivo
+        function updateDeviceInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const isMobile = width <= 768;
+            const isTablet = width > 768 && width <= 1024;
+            const isDesktop = width > 1024;
+
+            let deviceType = 'Desconhecido';
+            if (isMobile) deviceType = '[DISPOSITIVO] Telemóvel';
+            if (isTablet) deviceType = '[RELATORIO] Tablet';
+            if (isDesktop) deviceType = '[DESKTOP] Desktop';
+
+            let breakpoint = 'xxl';
+            if (width < 480) breakpoint = 'xs (< 480px)';
+            else if (width < 600) breakpoint = 'sm (480-599px)';
+            else if (width < 768) breakpoint = 'md (600-767px)';
+            else if (width < 1024) breakpoint = 'lg (768-1023px)';
+            else if (width < 1200) breakpoint = 'xl (1024-1199px)';
+            else breakpoint = 'xxl (1200px+)';
+
+            const orientation = height > width ? '[DISPOSITIVO] Retrato' : '[ATUAL] Paisagem';
+
+            document.getElementById('deviceType').textContent = deviceType;
+            document.getElementById('breakpoint').textContent = breakpoint;
+            document.getElementById('orientation').textContent = orientation;
+            document.getElementById('resolution').textContent = `${width}x${height}px`;
+            document.getElementById('breakpointBadge').textContent = breakpoint.split('(')[0].trim();
+        }
+
+        // Atualizar ao carregar
+        updateDeviceInfo();
+
+        // Atualizar ao redimensionar
+        window.addEventListener('resize', updateDeviceInfo);
+        window.addEventListener('orientationchange', updateDeviceInfo);
+
+        console.log('[OK] Teste de Responsividade Carregado');
+        console.log('Resolução:', window.innerWidth, 'x', window.innerHeight);
+    </script>
+</body>
+</html>
