@@ -1,0 +1,48 @@
+{
+  "info_projeto": {},
+  "tabelas_extra": [
+    {
+      "nome": "marcas",
+      "categoria": "Catálogo",
+      "tipo": "principal",
+      "descricao": "Marcas de veículos para formulários de marcação.",
+      "uso_principal": "Dropdown de marcas no index.php.",
+      "ficheiros_uso": "inc_marcas_modelos.php, sql/marcas_modelos.sql",
+      "colunas": [
+        {"nome": "id", "tipo_sql": "INT AUTO_INCREMENT", "descricao": "Chave primária", "chave_primaria": 1, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 0, "ordem": 1},
+        {"nome": "nome", "tipo_sql": "VARCHAR(100)", "descricao": "Nome da marca (único)", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 0, "ordem": 2}
+      ]
+    },
+    {
+      "nome": "modelos",
+      "categoria": "Catálogo",
+      "tipo": "principal",
+      "descricao": "Modelos associados a cada marca.",
+      "uso_principal": "Dropdown de modelos no index.php.",
+      "ficheiros_uso": "inc_marcas_modelos.php, sql/marcas_modelos.sql",
+      "colunas": [
+        {"nome": "id", "tipo_sql": "INT AUTO_INCREMENT", "descricao": "Chave primária", "chave_primaria": 1, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 0, "ordem": 1},
+        {"nome": "id_marca", "tipo_sql": "INT", "descricao": "FK → marcas.id", "chave_primaria": 0, "chave_estrangeira": "marcas.id", "valores_possiveis": null, "opcional": 0, "ordem": 2},
+        {"nome": "nome", "tipo_sql": "VARCHAR(100)", "descricao": "Nome do modelo", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 0, "ordem": 3}
+      ]
+    }
+  ],
+  "colunas_extra": {
+    "servico": [
+      {"nome": "estado_excesso_orcamento_cliente", "tipo_sql": "VARCHAR(20)", "descricao": "Decisão do cliente sobre valor acima do orçamento", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": "pendente, aceite, recusado", "opcional": 1, "ordem": 100},
+      {"nome": "data_excesso_orcamento_notificado", "tipo_sql": "DATETIME", "descricao": "Data de notificação do excesso de orçamento", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 101},
+      {"nome": "data_excesso_orcamento_resposta", "tipo_sql": "DATETIME", "descricao": "Data da resposta do cliente ao excesso", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 102},
+      {"nome": "codigo_levantamento", "tipo_sql": "VARCHAR(6)", "descricao": "Código de 6 dígitos para levantar o veículo", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 103},
+      {"nome": "codigo_levantamento_emitido_em", "tipo_sql": "DATETIME", "descricao": "Emissão do código de levantamento", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 104},
+      {"nome": "codigo_levantamento_usado_em", "tipo_sql": "DATETIME", "descricao": "Validação do código na entrega do veículo", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 105},
+      {"nome": "horas_trabalhadas", "tipo_sql": "DECIMAL(6,2)", "descricao": "Horas registadas na conclusão pelo mecânico", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 106},
+      {"nome": "valor_hora", "tipo_sql": "DECIMAL(8,2)", "descricao": "Valor/hora aplicado na fatura", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 107},
+      {"nome": "pecas_substituidas", "tipo_sql": "TEXT/JSON", "descricao": "Peças substituídas no fecho do serviço", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 108},
+      {"nome": "valor_pago_total", "tipo_sql": "DECIMAL(10,2)", "descricao": "Total já pago pelo cliente", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 109},
+      {"nome": "valor_em_divida", "tipo_sql": "DECIMAL(10,2)", "descricao": "Valor em dívida após pagamentos", "chave_primaria": 0, "chave_estrangeira": null, "valores_possiveis": null, "opcional": 1, "ordem": 110}
+    ]
+  },
+  "relacoes_extra": [
+    ["marcas", "id", "modelos", "id_marca", "Cada marca tem vários modelos"]
+  ]
+}
