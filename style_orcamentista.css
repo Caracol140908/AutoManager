@@ -1,0 +1,512 @@
+@import url("theme.css");
+
+/* style_orcamentista.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.header {
+    background: #2a2a2a;
+    padding: 20px;
+    border-bottom: 3px solid #ff4500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.welcome {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #2a2a2a, #333);
+    border-radius: 10px;
+    border-left: 4px solid #ff4500;
+}
+
+.welcome h1 {
+    color: #ff4500;
+    margin-bottom: 10px;
+}
+
+.card {
+    background: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: #ff4500;
+}
+
+.card h3 {
+    color: #ff4500;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.servico-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.info-item strong {
+    color: #ff4500;
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #ff4500;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #ff4500;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: #444;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #555;
+}
+
+.btn-danger {
+    background: #ff4444;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #ff6666;
+}
+
+.btn-success {
+    background: #00c853;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #00e676;
+}
+
+.btn-warning {
+    background: #ff4500;
+    color: white;
+}
+
+.btn-warning:hover {
+    background: #ffb74d;
+}
+
+.form-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    border: 2px solid #ff4500;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ff4500;
+    font-weight: 600;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background: #1a1a1a;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ff4500;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.estado-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.estado-pendente { 
+    background: #ff4500; 
+    color: white; 
+}
+
+.estado-analise { 
+    background: #2196f3; 
+    color: white; 
+}
+
+.estado-aprovado { 
+    background: #00c853; 
+    color: white; 
+}
+
+.estado-recusado { 
+    background: #ff4444; 
+    color: white; 
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #2a2a2a, #333);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #333;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: #ff4500;
+}
+
+.stat-card .number {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ff4500;
+    margin-bottom: 10px;
+}
+
+.logout-btn {
+    background: #ff4444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #ff6666;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.alert-success {
+    background: rgba(0, 200, 83, 0.2);
+    border-left: 4px solid #00c853;
+    color: #00e676;
+}
+
+.alert-warning {
+    background: rgba(255, 152, 0, 0.2);
+    border-left: 4px solid #ff4500;
+    color: #ffb74d;
+}
+
+.alert-info {
+    background: rgba(33, 150, 243, 0.2);
+    border-left: 4px solid #2196f3;
+    color: #64b5f6;
+}
+
+.empty-state {
+    background: #2a2a2a;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px dashed #444;
+}
+
+.empty-state h3 {
+    color: #00c853;
+    margin-bottom: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .servico-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff4500;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff4500;
+}   
+/* Adicione ao final do style_orcamentista.css */
+
+.section-title {
+    color: #ff4500;
+    margin: 40px 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+.user-name {
+    color: #ff4500;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+/* Melhorias para o modal */
+.modal-content h3 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+/* Efeito de loading para botões */
+.btn-loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Tooltip para botões */
+.btn[title] {
+    position: relative;
+}
+
+.btn[title]:hover::before {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    margin-bottom: 5px;
+}
+
+.btn[title]:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    margin-bottom: -5px;
+}
+
+/* Efeito de destaque para novos serviços */
+.card.new-service {
+    animation: pulse 2s infinite;
+    border-color: #ff4500;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 152, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+}
+
+/* Estilo para as estatísticas */
+.stats-grid .stat-card:nth-child(1) .number {
+    color: #ff9800; /* Pendentes */
+}
+
+.stats-grid .stat-card:nth-child(2) .number {
+    color: #00c853; /* Aprovados - verde */
+}
+
+.stats-grid .stat-card:nth-child(3) .number {
+    color: #ff4444; /* Recusados - vermelho */
+}
+
+.stats-grid .stat-card:nth-child(4) .number {
+    color: #2196f3; /* Valor - azul */
+}
+
+/* ===== TEMA GLOBAL PRETO/LARANJA ===== */
+:root{
+    --primary-color:#ff7a1a;
+    --accent-color:#ff7a1a;
+    --bg-color:#070708;
+    --card-color:#1a1a1c;
+    --text-color:#e4e4e7;
+}
+body{background:linear-gradient(180deg,#070708,#121214);color:var(--text-color);}
+.card,.stat-card,.orcamento-card,.panel,.modal-content{background:var(--card-color)!important;border-color:rgba(255,255,255,.08)!important;}
+.btn,.tab.active{border-color:rgba(255,122,26,.55)!important;}

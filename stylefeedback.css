@@ -1,0 +1,305 @@
+@import url("theme.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(255, 69, 0, 0.2);
+    border: 1px solid rgba(255, 69, 0, 0.3);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    color: #ff4500;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+}
+
+.header p {
+    color: #cccccc;
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.mensagem {
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1em;
+    border: 2px solid;
+}
+
+.mensagem.sucesso {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.mensagem.erro {
+    background: rgba(255, 69, 0, 0.1);
+    color: #ff4500;
+    border-color: rgba(255, 69, 0, 0.3);
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    color: #ff4500;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #ff4500;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #888888;
+}
+
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff4500'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+}
+
+.form-group select option {
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+.btn-enviar {
+    background: linear-gradient(135deg, #ff4500, #ff6b00);
+    color: #ffffff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background: linear-gradient(135deg, #ff6b00, #ff8500);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 69, 0, 0.4);
+}
+
+.btn-enviar:active {
+    transform: translateY(0);
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 69, 0, 0.2);
+}
+
+.info-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.info-card h3 {
+    color: #ff4500;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.info-card p {
+    color: #cccccc;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.voltar {
+    text-align: center;
+}
+
+.btn-voltar {
+    display: inline-block;
+    padding: 12px 25px;
+    background: transparent;
+    color: #ff4500;
+    text-decoration: none;
+    border: 2px solid #ff4500;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-voltar:hover {
+    background: #ff4500;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container > * {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        margin: 10px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+    
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 1.8em;
+    }
+    
+    .btn-enviar {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #ff4500, #ff6b00);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #ff6b00, #ff8500);
+}
+
+/* ===== TEMA GLOBAL PRETO/LARANJA ===== */
+:root{--accent:#ff7a1a;--bg:#070708;--bg2:#121214;--card:#1a1a1c;--text:#e4e4e7;}
+body{background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);}
+.card,.feedback-card,.container{background:var(--card)!important;border-color:rgba(255,255,255,.08)!important;}

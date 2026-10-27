@@ -1,0 +1,113 @@
+/**
+ * AutoManager — loading inicial (logo)
+ */
+html.am-is-loading {
+  overflow: hidden;
+}
+
+html.am-is-loading body {
+  overflow: hidden;
+}
+
+#am-page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+#am-page-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.am-loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 24px;
+  animation: amLoaderIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.am-loader-logo {
+  display: block;
+  width: min(300px, 76vw);
+  max-width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.am-loader-bar {
+  width: 128px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.am-loader-bar span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ea580c, #f97316);
+  animation: amLoaderSlide 1.15s ease-in-out infinite;
+}
+
+.am-loader-fallback {
+  font-family: var(--am-font, Inter, system-ui, sans-serif);
+  font-size: clamp(1.75rem, 6vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  line-height: 1;
+}
+
+.am-loader-fallback .dot {
+  color: #f97316;
+}
+
+@keyframes amLoaderIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes amLoaderSlide {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(330%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .am-loader-inner {
+    animation: none;
+  }
+
+  .am-loader-bar span {
+    animation: none;
+    width: 100%;
+    opacity: 0.85;
+  }
+
+  #am-page-loader {
+    transition-duration: 0.2s;
+  }
+}
