@@ -1,0 +1,279 @@
+/**
+ * Estilos base AUTOMANAGER — depende de theme.css (tokens --am-*).
+ */
+
+body {
+  margin: 0;
+  font-family: "Poppins", var(--am-font);
+  background: var(--am-black-2);
+  color: var(--am-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.am-font-inter {
+  font-family: "Inter", var(--am-font);
+}
+
+a {
+  color: var(--am-accent-hover);
+}
+
+a:hover {
+  color: var(--am-accent);
+}
+
+.am-card,
+.cfg-card,
+.pay-card {
+  background: var(--am-elevated);
+  border: 1px solid var(--am-border-strong);
+  border-radius: 12px;
+}
+
+.am-btn,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--am-radius);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--am-border-strong);
+  background: transparent;
+  color: var(--am-accent-hover);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.am-btn:hover,
+.btn:hover {
+  background: var(--am-accent-soft);
+  border-color: var(--am-accent);
+  color: var(--am-text);
+}
+
+.am-btn-primary,
+.btn.primary {
+  background: var(--am-accent);
+  border-color: var(--am-accent);
+  color: #fff;
+}
+
+.am-btn-primary:hover,
+.btn.primary:hover {
+  background: var(--am-accent-hover);
+  border-color: var(--am-accent-hover);
+  color: #fff;
+}
+
+.am-msg-err,
+.msg.err {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fecaca;
+  padding: 10px 12px;
+  border-radius: var(--am-radius);
+}
+
+.am-msg-ok,
+.msg.ok {
+  background: var(--success-soft);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #bbf7d0;
+  padding: 10px 12px;
+  border-radius: var(--am-radius);
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--am-text);
+  background: var(--am-black);
+  border: 1px solid var(--am-border-strong);
+  border-radius: var(--am-radius);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--am-accent-hover);
+  box-shadow: 0 0 0 3px var(--am-accent-soft);
+}
+
+.am-nif-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--am-text-muted, #9ca3af);
+}
+
+.am-nif-hint.is-error {
+  color: #f87171;
+}
+
+.am-nif-input.am-nif-invalid,
+input.am-nif-invalid,
+.am-iban-input.am-iban-invalid,
+input.am-iban-invalid,
+.am-telemovel-input.am-telemovel-invalid,
+input.am-telemovel-invalid {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.am-iban-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--am-text-muted, #9ca3af);
+}
+
+.am-iban-hint.is-error {
+  color: #f87171;
+}
+
+.am-iban-hint.is-progress {
+  color: var(--am-text-muted, #9ca3af);
+}
+
+.am-telemovel-hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--am-text-muted, #9ca3af);
+}
+
+.am-telemovel-hint.is-error {
+  color: #f87171;
+}
+
+/* Alertas de comparação orçamento (pagamento, fatura, configurações) */
+.fatura-intervencao-cmp {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  border: 1px solid transparent;
+}
+
+.fatura-intervencao-cmp::before {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fatura-intervencao-cmp strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.fatura-intervencao-cmp span {
+  display: block;
+  opacity: 0.92;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--dentro {
+  border-color: rgba(52, 211, 153, 0.32);
+  background: rgba(16, 185, 129, 0.1);
+  color: #bbf7d0;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--dentro::before {
+  content: "✓";
+  background: rgba(52, 211, 153, 0.16);
+  color: #34d399;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--dentro strong {
+  color: #6ee7b7;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--acima {
+  border-color: rgba(249, 115, 22, 0.38);
+  background: rgba(234, 88, 12, 0.12);
+  color: #fed7aa;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--acima::before {
+  content: "!";
+  background: rgba(249, 115, 22, 0.18);
+  color: #fb923c;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--acima strong {
+  color: #fdba74;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--abaixo {
+  border-color: rgba(52, 211, 153, 0.28);
+  background: rgba(6, 78, 59, 0.22);
+  color: #d1fae5;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--abaixo::before {
+  content: "↓";
+  background: rgba(52, 211, 153, 0.14);
+  color: #34d399;
+}
+
+.fatura-intervencao--dark .fatura-intervencao-cmp--abaixo strong {
+  color: #6ee7b7;
+}
+
+.fatura-intervencao--light .fatura-intervencao-cmp--dentro {
+  border-color: rgba(22, 163, 74, 0.28);
+  background: rgba(22, 163, 74, 0.08);
+  color: #166534;
+}
+
+.fatura-intervencao--light .fatura-intervencao-cmp--dentro::before {
+  content: "✓";
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
+}
+
+.fatura-intervencao--light .fatura-intervencao-cmp--acima {
+  border-color: rgba(234, 88, 12, 0.28);
+  background: rgba(255, 237, 213, 0.9);
+  color: #9a3412;
+}
+
+.fatura-intervencao--light .fatura-intervencao-cmp--acima::before {
+  content: "!";
+  background: rgba(234, 88, 12, 0.12);
+  color: #c2410c;
+}
+
+.fatura-intervencao--light .fatura-intervencao-cmp--abaixo {
+  border-color: rgba(5, 150, 105, 0.28);
+  background: rgba(209, 250, 229, 0.85);
+  color: #065f46;
+}
+
+.fatura-intervencao--light .fatura-intervencao-cmp--abaixo::before {
+  content: "↓";
+  background: rgba(5, 150, 105, 0.12);
+  color: #047857;
+}

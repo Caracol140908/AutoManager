@@ -1,0 +1,449 @@
+// AutoManager — modelo ER para https://dbdiagram.io/
+// Colar este ficheiro no editor DBML do site (Import → Paste)
+
+Project AutoManager {
+  database_type: 'MySQL'
+  Note: '''
+    Sistema de gestão de oficina automóvel.
+    Entidade central: servico (marcações, orçamentos, pagamentos).
+    Gerado a partir do código PHP do projeto.
+  '''
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: CLIENTES
+// ═══════════════════════════════════════════════════════════
+
+TableGroup clientes {
+  utilizador
+  carro
+  carro_perfil
+  carro_perfil_pedido
+}
+
+Table utilizador {
+  id_utilizador int [pk, increment, note: 'Cliente registado']
+  nome_utilizador varchar(100) [not null]
+  email varchar(150) [unique, not null]
+  password varchar(255) [not null]
+  telefone varchar(30)
+  nif varchar(20)
+  carro varchar(255) [note: 'Campo legado texto']
+  bloqueado tinyint [default: 0]
+  data_bloqueio datetime
+  termos_aceite tinyint
+  data_aceite datetime
+  reset_code varchar(10)
+  reset_expire timestamp
+  notif_cliente_pulse_ack varchar(32)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+
+  Note: 'Clientes do site — login, marcações, chat'
+}
+
+Table carro {
+  id_carro int [pk, increment]
+  id_utilizador int [not null, ref: > utilizador.id_utilizador]
+  marca varchar(60)
+  modelo varchar(80)
+  ano int
+  matricula varchar(20)
+  is_principal tinyint [default: 0]
+  notas text
+  created_at timestamp
+
+  Note: 'Veículos registados por cada cliente'
+}
+
+Table carro_perfil {
+  id_carro int [pk, ref: - carro.id_carro, note: '1:1 com carro']
+  propulsao varchar(40)
+  motorizacao varchar(120)
+  vin varchar(32)
+  km_atual int
+  consumo_l_100 decimal(5,2)
+  tipo_oleo varchar(120)
+  pneus_medida varchar(40)
+  seguro_seguradora varchar(100)
+  seguro_validade date
+  notas_oficina text
+  atualizado_em datetime
+
+  Note: 'Ficha técnica alargada do veículo'
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: OPERAÇÃO (núcleo)
+// ═══════════════════════════════════════════════════════════
+
+TableGroup operacao {
+  servico
+  servico_orcamento_item
+  mecanicos
+  orcamentista
+  chefes_oficina
+}
+
+Table servico {
+  id int [pk, increment, note: 'HUB — marcação/reparação']
+  id_utilizador int [ref: > utilizador.id_utilizador, note: 'Pode ser NULL; também liga por email']
+  nome varchar(255)
+  email varchar(255) [note: 'Ligação lógica alternativa a utilizador']
+  telefone varchar(30)
+  nif varchar(9)
+  marca varchar(60)
+  modelo varchar(80)
+  matricula varchar(20)
+  tipo_servico varchar(255)
+  data_desejada datetime
+  hora_desejada varchar(5)
+  custo decimal(10,2)
+  estado varchar(50)
+  estado_do_trabalho varchar(50) [note: 'Por Fazer | Em Andamento | Pronto']
+  mecanico_id int [ref: > mecanicos.id_mecanico]
+  id_orcamentista int [ref: > orcamentista.id_orcamentista]
+  estado_orcamento varchar(30)
+  orcamento_aprovado decimal(10,2)
+  estado_orcamento_cliente varchar(20)
+  estado_pagamento varchar(20)
+  metodo_pagamento varchar(30)
+  token_pagamento varchar(255)
+  numero_fatura varchar(40)
+  fatura_linhas_json longtext
+  notas_internas text
+  notas_mecanico longtext
+  estado_marcacao varchar(20) [default: 'ativa']
+  created_at timestamp
+
+  Note: 'Marcações, orçamentos, pagamentos e estados de reparação'
+}
+
+Table servico_orcamento_item {
+  id int [pk, increment]
+  servico_id int [not null, ref: > servico.id]
+  orden smallint [default: 0]
+  categoria varchar(24) [default: 'outro']
+  descricao varchar(500) [not null]
+  quantidade decimal(10,3) [default: 1]
+  preco_unitario decimal(10,2) [default: 0]
+  minutos_trabalho smallint
+  grupo_alternativa varchar(40)
+  decisao_cliente varchar(20) [default: 'aceite']
+
+  Note: 'Linhas do orçamento (peças, mão de obra)'
+}
+
+Table mecanicos {
+  id_mecanico int [pk, increment]
+  id_chefe int [ref: > chefes_oficina.id_chefe, note: 'Chefe responsável']
+  nome_mecanico varchar(100) [not null]
+  email varchar(100) [unique, not null]
+  password varchar(255)
+  contacto varchar(20)
+  especialidade varchar(100)
+  ordenado_bruto decimal(10,2)
+  ativo tinyint [default: 1]
+  primeiro_login tinyint [default: 1]
+  data_despedimento date
+  created_at timestamp
+
+  Note: 'Funcionários da oficina — área técnica'
+}
+
+Table orcamentista {
+  id_orcamentista int [pk, increment]
+  nome_orcamentista varchar(100) [not null]
+  email varchar(100) [unique, not null]
+  password varchar(255) [not null]
+  especialidade varchar(100)
+  salario_bruto decimal(10,2)
+  ativo tinyint [default: 1]
+  primeiro_login tinyint [default: 1]
+  created_at timestamp
+
+  Note: 'Elabora orçamentos para marcações'
+}
+
+Table chefes_oficina {
+  id_chefe int [pk, increment]
+  nome varchar(100) [not null]
+  email varchar(100) [unique, not null]
+  password varchar(255) [not null]
+  nivel_acesso varchar(20)
+  ativo tinyint [default: 1]
+  primeiro_login tinyint [default: 1]
+  created_at timestamp
+
+  Note: 'Chefes de oficina — painel operacional'
+}
+
+Table carro_perfil_pedido {
+  id int [pk, increment]
+  id_carro int [not null, ref: > carro.id_carro]
+  id_utilizador int [not null, ref: > utilizador.id_utilizador]
+  id_servico int [ref: > servico.id, note: 'Opcional']
+  id_mecanico int [ref: > mecanicos.id_mecanico, note: 'Opcional']
+  estado varchar(20) [default: 'pendente']
+  created_at datetime
+  resolved_at datetime
+
+  Note: 'Pedidos para completar perfil do veículo'
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: RH
+// ═══════════════════════════════════════════════════════════
+
+TableGroup rh {
+  presenca
+  historico_salarios
+}
+
+Table presenca {
+  id_presenca int [pk, increment]
+  id_mecanico int [not null, ref: > mecanicos.id_mecanico]
+  data date [not null]
+  hora_entrada time
+  hora_saida time
+  total_horas decimal(5,2)
+  falta tinyint [default: 0]
+  justificacao text
+  criado_em timestamp
+
+  indexes {
+    (id_mecanico, data) [unique]
+  }
+
+  Note: 'Bate-ponto dos mecânicos'
+}
+
+Table historico_salarios {
+  id_historico int [pk, increment]
+  id_mecanico int [not null, ref: > mecanicos.id_mecanico]
+  alterado_por int [not null, ref: > chefes_oficina.id_chefe]
+  salario_anterior decimal(10,2)
+  salario_novo decimal(10,2)
+  data_alteracao date
+  motivo_alteracao varchar(255)
+  criado_em timestamp
+
+  Note: 'Auditoria de alterações salariais'
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: COMUNICAÇÃO
+// ═══════════════════════════════════════════════════════════
+
+TableGroup comunicacao {
+  chat_mensagens
+  feedback_duvidas
+  pedidos_desbloqueio
+}
+
+Table chat_mensagens {
+  id int [pk, increment]
+  de_usuario_id int [ref: > utilizador.id_utilizador, note: 'NULL se admin']
+  de_usuario_nome varchar(100)
+  para_usuario_id int [ref: > utilizador.id_utilizador, note: '0=admin; ID cliente nas respostas']
+  mensagem text [not null]
+  data_envio timestamp
+  lida_admin tinyint [default: 0]
+  lida_usuario tinyint [default: 1]
+
+  Note: 'Chat suporte cliente ↔ admin (FK lógica, sem constraint na BD real)'
+}
+
+Table feedback_duvidas {
+  id int [pk, increment]
+  nome varchar(100)
+  email varchar(100)
+  tipo varchar(20) [note: 'feedback | duvida']
+  assunto varchar(200)
+  mensagem text
+  resposta text
+  estado varchar(20) [default: 'pendente']
+  data_envio timestamp
+  data_resposta timestamp
+
+  Note: 'Formulário público de feedback/dúvidas'
+}
+
+Table pedidos_desbloqueio {
+  id int [pk, increment]
+  id_utilizador int [not null, ref: > utilizador.id_utilizador]
+  email varchar(255)
+  nome_utilizador varchar(255)
+  motivo varchar(255)
+  mensagem text
+  estado varchar(20) [default: 'pendente']
+  data_pedido datetime
+  data_resposta datetime
+  resposta text
+
+  Note: 'Pedidos de reativação de conta bloqueada'
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: SISTEMA / SITE
+// ═══════════════════════════════════════════════════════════
+
+TableGroup sistema {
+  administrador
+  estado_site
+  atualizacoes_site
+  visualizacoes_atualizacoes
+  sessoes_temporarias
+  logs
+  telegram_config
+  avaliacoes_temp
+  emails_marketing
+}
+
+Table administrador {
+  id_admin int [pk, increment]
+  username varchar(100)
+  email varchar(150) [unique]
+  password varchar(255)
+  nivel varchar(50)
+  reset_code varchar(10)
+  reset_expire timestamp
+
+  Note: 'Conta administração — entidade independente'
+}
+
+Table estado_site {
+  id int [pk, note: 'Singleton id=1']
+  estado varchar(1) [note: '0=normal 1=manutenção']
+  mensagem text
+  data_atualizacao timestamp
+
+  Note: 'Modo manutenção do site'
+}
+
+Table atualizacoes_site {
+  id int [pk, increment]
+  mensagem text
+  data_publicacao datetime
+
+  Note: 'Banners de novidades no site'
+}
+
+Table visualizacoes_atualizacoes {
+  id int [pk, increment]
+  id_utilizador int [ref: > utilizador.id_utilizador]
+  id_atualizacao int [ref: > atualizacoes_site.id]
+
+  Note: 'Registo de mensagens já vistas pelo cliente'
+}
+
+Table sessoes_temporarias {
+  id int [pk, increment]
+  ip_address varchar(45)
+  user_agent text
+  utilizador_id int [ref: > utilizador.id_utilizador, note: 'Após login']
+  primeiro_acesso datetime
+  ultimo_acesso datetime
+  expirou tinyint
+
+  Note: 'Visitantes anónimos antes de registo'
+}
+
+Table logs {
+  id int [pk, increment]
+  origem varchar(100)
+  mensagem text
+  dados text
+  criado_em timestamp
+
+  Note: 'Auditoria / eventos do sistema'
+}
+
+Table telegram_config {
+  id int [pk, increment]
+  bot_token varchar(255)
+  chat_id varchar(100)
+  ativo tinyint
+
+  Note: 'Configuração notificações Telegram'
+}
+
+Table avaliacoes_temp {
+  id int [pk, increment]
+  nome varchar(100)
+  email varchar(150) [unique]
+  avaliacao int [note: '1 a 5']
+  comentario text
+  ip_address varchar(45)
+  data_avaliacao timestamp
+
+  Note: 'Popup de avaliação do site'
+}
+
+Table emails_marketing {
+  id int [pk, increment]
+  email varchar(150) [unique]
+  nome varchar(100)
+  data_registo timestamp
+  optout tinyint [default: 0]
+
+  Note: 'Campanhas email — JOIN lógico com avaliacoes_temp por email'
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: PASSAPORTE DO VEÍCULO
+// ═══════════════════════════════════════════════════════════
+
+TableGroup passaporte {
+  passaporte_eventos
+  passaporte_links_partilha
+}
+
+Table passaporte_eventos {
+  id int [pk, increment]
+  email varchar(190) [note: 'Ligação lógica a utilizador']
+  matricula varchar(30) [note: 'Ligação lógica a carro']
+  tipo varchar(60)
+  descricao text
+  odometro int
+  data_evento datetime
+  origem varchar(40) [default: 'sistema']
+  hash_evento varchar(64)
+
+  Note: 'Histórico veículo — sincronizado a partir de servico'
+}
+
+Table passaporte_links_partilha {
+  id int [pk, increment]
+  email varchar(190)
+  matricula varchar(30)
+  token varchar(80) [unique]
+  expira_em datetime
+  revogado_em datetime
+  views int [default: 0]
+
+  Note: 'Links temporários de partilha do passaporte'
+}
+
+// ═══════════════════════════════════════════════════════════
+// GRUPO: AI (opcional)
+// ═══════════════════════════════════════════════════════════
+
+TableGroup ai {
+  ai_conversas
+  ai_diagnosticos
+}
+
+Table ai_conversas {
+  id int [pk, increment]
+  data_registro datetime
+
+  Note: 'Módulo AI — só leitura em relatórios'
+}
+
+Table ai_diagnosticos {
+  id int [pk, increment]
+  problema_identificado text
+  data_analise datetime
+
+  Note: 'Módulo AI — só leitura em relatórios'
+}

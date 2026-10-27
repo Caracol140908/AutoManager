@@ -1,0 +1,441 @@
+@import url("theme.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.fat-doc {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: #eceff3;
+  color: #1f2937;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fat-page {
+  max-width: 920px;
+  margin: 24px auto;
+  background: #fff;
+  border: 1px solid #d8dee6;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+}
+
+.fat-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 28px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #fff;
+}
+
+.fat-banner__brand {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.fat-banner__title {
+  text-align: right;
+}
+
+.fat-banner__title strong {
+  display: block;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+}
+
+.fat-banner__title span {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  opacity: 0.92;
+}
+
+.fat-top {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 24px;
+  padding: 24px 28px 8px;
+}
+
+.fat-block__title {
+  margin: 0 0 12px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.fat-dl {
+  margin: 0;
+}
+
+.fat-dl > div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+}
+
+.fat-dl dt {
+  margin: 0;
+  font-weight: 700;
+  color: #475569;
+}
+
+.fat-dl dd {
+  margin: 0;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.fat-dl--compact > div {
+  grid-template-columns: 72px 1fr;
+  margin-bottom: 6px;
+  font-size: 0.82rem;
+}
+
+.fat-block--empresa {
+  position: relative;
+}
+
+.fat-total-box {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid #dbe3ee;
+  text-align: right;
+}
+
+.fat-total-box__label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.fat-total-box__value {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ea580c;
+  font-variant-numeric: tabular-nums;
+}
+
+.fat-total-box__meta {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.fat-block--full {
+  padding: 8px 28px 20px;
+}
+
+.fat-vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fat-vehicle-grid > div {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.fat-vehicle-grid span {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.fat-vehicle-grid strong {
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.fat-table-wrap {
+  padding: 0 28px 24px;
+}
+
+.fat-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #dbe3ee;
+}
+
+.fat-table thead th {
+  background: #334155;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 11px 12px;
+}
+
+.fat-table tbody td {
+  padding: 12px;
+  border-top: 1px solid #e2e8f0;
+  font-size: 0.88rem;
+  color: #1e293b;
+  vertical-align: top;
+}
+
+.fat-table tbody tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+.col-qtd {
+  width: 72px;
+  text-align: center;
+}
+
+.col-money {
+  width: 120px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.fat-totals {
+  margin-top: 0;
+  margin-left: auto;
+  width: min(100%, 320px);
+  border: 1px solid #dbe3ee;
+  border-top: none;
+}
+
+.fat-totals__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  background: #fff;
+}
+
+.fat-totals__row strong {
+  color: #0f172a;
+  font-variant-numeric: tabular-nums;
+}
+
+.fat-totals__row--grand {
+  background: #f97316;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  border-top: none;
+}
+
+.fat-totals__row--grand strong,
+.fat-totals__row--grand span {
+  color: #fff;
+}
+
+.fat-bottom {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 20px;
+  padding: 8px 28px 24px;
+}
+
+.fat-block--notes p {
+  margin: 0 0 10px;
+  font-size: 0.84rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.fat-pay-status {
+  margin-top: 12px !important;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem !important;
+}
+
+.fat-pay-status--ok {
+  background: #ecfdf5;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.fat-pay-status--pending {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+}
+
+.fat-side-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.fat-side-card h3 {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.fat-side-card p {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  color: #334155;
+}
+
+.fat-history {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.76rem;
+}
+
+.fat-history th,
+.fat-history td {
+  padding: 6px 4px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.fat-history th:last-child,
+.fat-history td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.fat-footer {
+  padding: 16px 28px 20px;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.fat-footer p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.fat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 0 28px 24px;
+}
+
+.fat-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 18px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.fat-btn--primary {
+  background: #f97316;
+  border-color: #f97316;
+  color: #fff;
+}
+
+.fat-btn:hover {
+  filter: brightness(1.03);
+}
+
+@media (max-width: 800px) {
+  .fat-page {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  .fat-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 18px;
+  }
+
+  .fat-banner__title {
+    text-align: left;
+  }
+
+  .fat-top,
+  .fat-bottom,
+  .fat-vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fat-top,
+  .fat-block--full,
+  .fat-table-wrap,
+  .fat-bottom,
+  .fat-footer,
+  .fat-actions {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .fat-dl > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .fat-totals {
+    width: 100%;
+  }
+
+  .fat-actions .fat-btn {
+    width: 100%;
+  }
+}
+
+@media print {
+  body.fat-doc {
+    background: #fff;
+  }
+
+  .fat-page {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    max-width: 100%;
+  }
+
+  .no-print,
+  .fat-actions {
+    display: none !important;
+  }
+}
